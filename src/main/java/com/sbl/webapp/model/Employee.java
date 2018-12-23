@@ -8,8 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+//import javax.validation.constraints.NotBlank;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -41,7 +45,14 @@ public class Employee {
 	private String team;
 	
 	@NotBlank
+	@Temporal(TemporalType.TIMESTAMP)
+	@LastModifiedDate
 	private Date crDt;	
+
+	@NotBlank
+	@Temporal(TemporalType.TIMESTAMP)
+	@LastModifiedDate
+	private Date updDt;
 	
 	@NotBlank
 	private String profile;
@@ -116,6 +127,14 @@ public class Employee {
 
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+
+	public Date getUpdDt() {
+		return updDt;
+	}
+
+	public void setUpdDt(Date updDt) {
+		this.updDt = updDt;
 	}
 
 	@Override
